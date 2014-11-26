@@ -1,0 +1,73 @@
+
+train(8.64)
+    word_embedding_weights: [250x8 double]
+      embed_to_hid_weights: [24x64 double]
+     hid_to_output_weights: [64x250 double]
+                  hid_bias: [64x1 double]
+               output_bias: [250x1 double]
+                     vocab: {1x250 cell}
+                    epochs: 7
+                   trainCE: 2.8385
+                   validCE: 2.8672
+                    testCE: 2.8661
+train(8,256)
+    word_embedding_weights: [250x8 double]
+      embed_to_hid_weights: [24x256 double]
+     hid_to_output_weights: [256x250 double]
+                  hid_bias: [256x1 double]
+               output_bias: [250x1 double]
+                     vocab: {1x250 cell}
+                    epochs: 9
+                   trainCE: 2.6623
+                   validCE: 2.7313
+                    testCE: 2.7346
+train(32,64)
+    word_embedding_weights: [250x32 double]
+      embed_to_hid_weights: [96x64 double]
+     hid_to_output_weights: [64x250 double]
+                  hid_bias: [64x1 double]
+               output_bias: [250x1 double]
+                     vocab: {1x250 cell}
+                    epochs: 7
+                   trainCE: 2.7259
+                   validCE: 2.7714
+                    testCE: 2.7706
+train(32,256)
+  word_embedding_weights: [250x32 double]
+        embed_to_hid_weights: [96x256 double]
+       hid_to_output_weights: [256x250 double]
+                    hid_bias: [256x1 double]
+                 output_bias: [250x1 double]
+                       vocab: {1x250 cell}
+                      epochs: 8
+                     trainCE: 2.5633
+                     validCE: 2.6502
+                      testCE: 2.6528
+
+Word Distance
+using Model with 32 by 256
+
+word_distance('home','family',model4) = 1.4801
+word_distance('did','does',model4) = 2.9038
+word_distance('do','does',model4) = 4.2350
+word_distance('family','home',model4) = 1.4801
+word_distance('university','dr.',model4) = 0.5451
+word_distance('your','you',model4) = 4.9680
+word_distance('second','first',model4) = 1.4952
+word_distance('be','before',model4) = 4.9976
+word_distance('some','so',model4) = 4.7566
+word_distance('companies','country',model4) = 1.2686
+word_distance('used','country',model4) = 4.0790
+
+
+Analysis
+
+The d = 32 , num_hid = 256, worked better because we have 250 words to predict a 4th word in a 4-gram, having a larger d allows a better representation of the inputs, and a larger num_hid helps with being able to find patterns in the words given to try and predict the next word.
+
+Similar words are closer together by meaning except for prepositions. words like university and dr. are far much closer then did and does, even though did and does are just a different tense.
+The reasoning for this can be that prepositions are used more often and thus have to be less similar in a prediction.
+
+Calling display_nearest_words on the prepositions return almost all the tenses in the top 5.
+A funny thing was the nearest word to university and dr. was $.
+
+The semantic meaning to most of these words seem to be what is making them closer together, but words that are spelt similarly seems to be close aswell.
