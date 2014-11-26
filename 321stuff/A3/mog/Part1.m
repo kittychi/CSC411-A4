@@ -1,0 +1,21 @@
+function [ ] = Part1( )
+%UNTITLED1 Summary of this function goes here
+%   Detailed explanation goes here
+
+
+	[Valid,Train] = mogem(10,1,0.1,0);
+	X = -Valid;
+	Y = -Train;
+	N = 1;
+
+
+	for num = 2:100
+		[Valid,Train] = mogem(10,num,0.1,0)
+		X = cat(1,X,-Valid);
+		Y = cat(1,Y,-Train);
+		N = cat(1,N,num);
+	end
+
+	plot(N,X,'r');
+	hold on;
+	plot(N,Y,'b');

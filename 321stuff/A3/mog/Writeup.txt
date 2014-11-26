@@ -1,0 +1,36 @@
+Part 1
+
+Used mogem(10,num,0.1,0) from 1 to 125 (5x25)
+
+changing Stdev means that we will allow more results to be correct thus changing the log probs (making them smaller). This will allow for a new global minimum due to leaving more room for error.
+
+
+
+Shows that the global min is at 6 and going over it makes the log prob suffer. We only need to test at 125 since we are testing every gaussian 25 times.
+
+
+Part 2
+
+Used mogem(10,num,0.1,0) from 1 to 100 (10x10)
+
+Global min at 8
+
+Since we have more Test cases we needed more gaussians circles to fit them.
+given that we were off by +1 for part 1 and we are now off by -2 for part 2, This means that Part 1 had a closer approxiamtion to the actual gaussian where as in Part 2 we used less then was needed meaning that the circles needed to circle every gaussian can be approximated better with less gaussians meaning overlapping testcases. In part 1 we went over meaning that each of the 25 test cases in the 5 gaussians could not be approximated in 5 but needed to use 1 more to approximate it better.
+
+
+
+Part 3
+
+[0.25,0.25,0.25,0.25]:
+mogem(10,4,0.1,0, [0.25,0.25,0.25,0.25]) gave [ 0.1974,0.2803,0.2976,0.2247]
+
+[0.3, 0.2, 0.2, 0.3]:
+mogem(10,4,0.1,0, [0.3, 0.2, 0.2, 0.3]) gave [0.1995,0.2803,0.2930,0.2272]
+
+[0.2, 0.3, 0.3, 0.2]:
+mogem(10,4,0.1,0, [0.2, 0.3, 0.3, 0.2]) gave [0.1955,0.2803,0.3019,0.2223]
+
+[0.9, 0.05, 0.025, 0.025]:
+mogem(10,4,0.1,0, [0.9, 0.05, 0.025, 0.025]) gave [0.2576,0.2724,0.2450,0.2249]
+
