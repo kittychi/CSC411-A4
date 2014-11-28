@@ -1,0 +1,40 @@
+load labeled_images.mat;
+load public_test_images.mat;
+%load hidden_test_images.mat;
+
+h = size(tr_images,1);
+w = size(tr_images,2);
+
+if ~exist('hidden_test_images', 'var')
+  test_images = public_test_images;
+else
+  test_images = cat(3, public_test_images, hidden_test_images);
+end
+
+
+
+% create the indicators for each of the 7 classes
+for i=1:7 
+    classid{i} = tr_labels==i; 
+end
+
+% reorder tr_images into a NxD matrix,
+% where N = number of examples
+% and   D = number of dimensions (pixesl in this case)
+
+ntr = size(tr_images, 3);
+ntest = size(test_images, 3); 
+
+resized_tr_images = double(reshape(tr_images, [h*w, ntr]));
+X = resized_tr_images'; 
+
+% train svm 
+for i=1:1
+    models{i} = fitcsvm(X, classid{i}, 'CrossVal', 'on'); 
+    posteriors{i} = fitSVMPosterior(models{i}); 
+    [label, score] = predict(posteriors{i}, 
+    loss{i} = kfoldLoss(cvmodels{i}); 
+end; 
+
+% 
+% test_images = double(reshape(test_images, [h*w, ntest]));
